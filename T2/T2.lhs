@@ -1,7 +1,13 @@
+> import System.Random
+> import Data.List
+
 > data Jogador = Jogador String [[String]] deriving Show
 
 > nome (Jogador n _ ) = n
 > cartela (Jogador _ c) = c
+
+> sorteiaInt :: Int -> Int -> IO Int
+> sorteiaInt min max = getStdRandom (randomR (min,max))
 
 > inicia_jogador :: Int-> Int -> IO () 
 > inicia_jogador n x = do
@@ -18,5 +24,5 @@
 >    putStrLn "Informe a quantidade de jogadores"
 >    quant <- getLine
 >    let q = (read quant :: Int)
->    inicia_jogador q
+>    inicia_jogador q 1
 
