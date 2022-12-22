@@ -9,6 +9,14 @@
 > sorteiaInt :: Int -> Int -> IO Int
 > sorteiaInt min max = getStdRandom (randomR (min,max))
 
+> randomLinha :: Int -> IO([Int])
+> randomLinha n = do
+>   let min = 1 + (n-1) * 15
+>   let max = min + 14
+>   g <- newStdGen
+>   let l = sort $ take 5 . nub $ (randomRs (min,max) g :: [Int])
+>   return l
+ 
 > inicia_jogador :: Int-> Int -> IO () 
 > inicia_jogador n x = do
 >   if n == 1 then do
