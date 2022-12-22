@@ -28,6 +28,27 @@
 >       nome <- getLine
 >       inicia_jogador (n-1) (x+1)
 
+> recFind :: [Int] -> Int -> Int -> Int  --recursividade pra achar isso 
+> recFind [] _ _ = -1
+> recFind (x:xs) n i = 
+>    if x == n then
+>        i
+>    else
+>        recFind xs n (i+1)
+
+> buscaElemento :: [Int] -> Int -> Int --retorna índice de valor N na lista L. Se não achar, retorna -1 
+> buscaElemento l n = recFind l n 0
+    
+
+> funcaoTeste :: IO(Int) --Gera um numero aleatorio de 1 a 15 e uma linha de cartela e procura o indice
+> funcaoTeste = do
+>   x <- getStdRandom (randomR (1,15)) :: IO(Int)
+>   print x
+>   y <- randomLinha 1 :: IO([Int])
+>   print y
+>   return $ buscaElemento y x
+
+
 > main = do 
 >    putStrLn "Informe a quantidade de jogadores"
 >    quant <- getLine
