@@ -44,13 +44,29 @@
 >       let aux = a:l
 >       cria_cartela (x-1) aux
 
+> -- Confere se modo de jogo inserido é valido
+> confere_modo nome modo = do
+>   if modo == "l" || modo == "c" then do
+>       return modo
+>   else do
+>       putStrLn "======================= ERRO ======================"
+>       putStrLn "O modo de jogo deve ser (l) ou (c)"
+>       modo2 <- insere_modo nome
+>       confere_modo nome modo2
+
+> -- insere o modo de jogo
+> insere_modo nome = do
+>   putStrLn ("Digite o tipo da cartela de " ++ nome ++ " −− (l) para linha e (c) para coluna :")  
+>   let modo = getLine
+>   modo
+
 > -- Cria jogadores
 > inicia_jogador n x j = do
 >   if n == 1 then do
 >       putStrLn ("Qual o nome do jogador"  ++ show x ++ "?")
 >       nome <- getLine
->       putStrLn ("Digite o tipo da cartela de " ++ nome ++ " −− (l) para linha e (c) para coluna :")
->       modo <- getLine
+>       modo <- insere_modo nome
+>       modo <- confere_modo nome modo
 >       cartela <- cria_cartela 5 []
 >       let cartela_bool = cria_cartela_bool
 >       let jog = Jogador nome cartela cartela_bool modo
@@ -59,8 +75,8 @@
 >   else do
 >       putStrLn ("Qual o nome do jogador"  ++ show x ++ "?") 
 >       nome <- getLine
->       putStrLn ("Digite o tipo da cartela de " ++ nome ++ " −− (l) para linha e (c) para coluna :")
->       modo <- getLine
+>       modo <- insere_modo nome
+>       modo <- confere_modo nome modo
 >       cartela <- cria_cartela 5 []
 >       let cartela_bool = cria_cartela_bool
 >       let jog = Jogador nome cartela cartela_bool modo
